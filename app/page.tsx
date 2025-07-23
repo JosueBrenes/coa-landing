@@ -523,7 +523,7 @@ export default function Component() {
               >
                 <iframe
                   className="absolute top-0 left-0 w-full h-full rounded-lg sm:rounded-xl"
-                  src="https://www.youtube.com/embed/mRH9Z97SwHY?si=QkK4qp9HwxYkMBaG"
+                  src="https://www.youtube.com/embed/mRH9Z97SwHY?si=QkK4qp9HwxYkMBaG&autoplay=1&vq=hd1080"
                   title="Citizen of Arcanis - Gameplay Demo"
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
