@@ -1,7 +1,18 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ArrowRight, Download, Menu } from "lucide-react";
+import {
+  ArrowRight,
+  Download,
+  Menu,
+  Zap,
+  Map,
+  Package,
+  Sword,
+  Shield,
+  Skull,
+  Cpu,
+} from "lucide-react";
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 
@@ -103,6 +114,85 @@ export default function Component() {
       setMessage("Error submitting form");
     }
   };
+
+  const gameplayFeatures = [
+    {
+      icon: Zap,
+      title: "Narrative Decisions",
+      description:
+        "Every choice shapes your destiny and alters the balance of power in Arcanis.",
+      gradient: "from-yellow-400 to-orange-500",
+    },
+    {
+      icon: Map,
+      title: "Exploration",
+      description:
+        "Discover hidden secrets in the most dangerous corners of the dystopian city.",
+      gradient: "from-blue-400 to-purple-500",
+    },
+    {
+      icon: Package,
+      title: "Resource Collection",
+      description:
+        "Gather resources and upgrade your abilities to survive in this hostile world.",
+      gradient: "from-green-400 to-teal-500",
+    },
+    {
+      icon: Sword,
+      title: "Combat",
+      description:
+        "Face your enemies with a tactical and immersive combat system.",
+      gradient: "from-red-400 to-pink-500",
+    },
+  ];
+
+  const factions = [
+    {
+      name: "Chaos Mercenaries",
+      description:
+        "Lawless warriors who sell their services to the highest bidder. Masters of chaos, they operate in the shadows where morality is just a memory.",
+      icon: Skull,
+      gradient: "from-red-500 to-orange-600",
+      bgGradient: "from-red-500/20 to-orange-600/20",
+      borderColor: "border-red-500/30",
+      hoverBorder: "hover:border-red-400/60",
+      stats: [
+        { label: "Aggression", value: 95 },
+        { label: "Stealth", value: 85 },
+        { label: "Loyalty", value: 30 },
+      ],
+    },
+    {
+      name: "Supreme Law",
+      description:
+        "Guardians of order and protectors of the last social structure. Their justice is relentless and their control, absolute.",
+      icon: Shield,
+      gradient: "from-blue-500 to-cyan-600",
+      bgGradient: "from-blue-500/20 to-cyan-600/20",
+      borderColor: "border-blue-500/30",
+      hoverBorder: "hover:border-blue-400/60",
+      stats: [
+        { label: "Order", value: 98 },
+        { label: "Defense", value: 90 },
+        { label: "Justice", value: 85 },
+      ],
+    },
+    {
+      name: "Rebel Technomancers",
+      description:
+        "Visionaries who merge technology and mysticism. They seek to transcend the limits of flesh toward a collective digital consciousness.",
+      icon: Cpu,
+      gradient: "from-purple-500 to-pink-600",
+      bgGradient: "from-purple-500/20 to-pink-600/20",
+      borderColor: "border-purple-500/30",
+      hoverBorder: "hover:border-purple-400/60",
+      stats: [
+        { label: "Technology", value: 100 },
+        { label: "Innovation", value: 95 },
+        { label: "Mysticism", value: 88 },
+      ],
+    },
+  ];
 
   return (
     <div className="min-h-screen bg-[#100425] text-white overflow-x-hidden">
@@ -206,158 +296,191 @@ export default function Component() {
       {/* Factions Section */}
       <section
         ref={factionsRef}
-        className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12"
+        className="max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-20"
       >
         <motion.div
           variants={fadeInUp}
           initial="hidden"
           animate={factionsInView ? "visible" : "hidden"}
-          className="text-center mb-8 sm:mb-12"
+          className="text-center mb-12 sm:mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
-            Factions
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
+            <span className="bg-gradient-to-r from-[#f0a0f6] to-[#9747ff] bg-clip-text text-transparent">
+              Factions
+            </span>
           </h2>
+          <p className="text-[#d9d9d9] text-lg sm:text-xl max-w-3xl mx-auto leading-relaxed">
+            Choose your allegiance and shape the future of Arcanis through the
+            power of your faction
+          </p>
         </motion.div>
 
         <motion.div
           variants={staggerContainer}
           initial="hidden"
           animate={factionsInView ? "visible" : "hidden"}
-          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"
+          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
         >
-          {[
-            {
-              name: "Chaos Mercenaries",
-              description:
-                "Lawless warriors who sell their services to the highest bidder. Masters of chaos, they operate in the shadows where morality is just a memory.",
-              image: "chaos mercenaries cyberpunk",
-            },
-            {
-              name: "Supreme Law",
-              description:
-                "Guardians of order and protectors of the last social structure. Their justice is relentless and their control, absolute.",
-              image: "supreme law enforcement cyberpunk",
-            },
-            {
-              name: "Rebel Technomancers",
-              description:
-                "Visionaries who merge technology and mysticism. They seek to transcend the limits of flesh toward a collective digital consciousness.",
-              image: "technomancer rebels cyberpunk",
-            },
-          ].map((faction, index) => (
-            <motion.div
-              key={index}
-              variants={staggerItem}
-              whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
-              className="bg-gradient-to-br from-[#100425] to-[#9747ff]/20 rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-[#9747ff]/30"
-            >
-              <img
-                src={`/placeholder.svg?height=200&width=200&query=${faction.image}`}
-                alt={faction.name}
-                className="w-full h-32 sm:h-48 object-cover rounded-lg sm:rounded-xl mb-3 sm:mb-4"
-              />
-              <h3 className="text-lg sm:text-xl font-semibold mb-2">
-                {faction.name}
-              </h3>
-              <p className="text-[#d9d9d9] text-sm sm:text-base leading-relaxed">
-                {faction.description}
-              </p>
-            </motion.div>
-          ))}
+          {factions.map((faction, index) => {
+            const IconComponent = faction.icon;
+            return (
+              <motion.div
+                key={index}
+                variants={staggerItem}
+                whileHover={{
+                  scale: 1.05,
+                  transition: { duration: 0.3, ease: "easeOut" },
+                }}
+                className="group relative"
+              >
+                <div
+                  className={`relative bg-gradient-to-br from-[#100425]/90 to-[#1a0a3a]/90 backdrop-blur-sm rounded-3xl p-6 sm:p-8 border ${faction.borderColor} ${faction.hoverBorder} transition-all duration-300 overflow-hidden h-full`}
+                >
+                  {/* Animated background gradient */}
+                  <div
+                    className={`absolute inset-0 bg-gradient-to-br ${faction.bgGradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
+                  ></div>
+
+                  {/* Decorative elements */}
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-white/5 to-transparent rounded-bl-full"></div>
+                  <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-white/5 to-transparent rounded-tr-full"></div>
+
+                  {/* Icon with gradient background */}
+                  <div className="relative z-10 mb-6">
+                    <div
+                      className={`inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-gradient-to-br ${faction.gradient} mb-4 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-lg`}
+                    >
+                      <IconComponent className="w-10 h-10 text-white" />
+                    </div>
+                  </div>
+
+                  <div className="relative z-10 space-y-4">
+                    <h3 className="text-2xl sm:text-3xl font-bold group-hover:text-white transition-colors duration-300">
+                      {faction.name}
+                    </h3>
+
+                    <p className="text-[#d9d9d9] text-sm sm:text-base leading-relaxed group-hover:text-white/90 transition-colors duration-300">
+                      {faction.description}
+                    </p>
+
+                    {/* Stats bars */}
+                    <div className="space-y-3 pt-4">
+                      {faction.stats.map((stat, statIndex) => (
+                        <div key={statIndex} className="space-y-1">
+                          <div className="flex justify-between text-xs sm:text-sm">
+                            <span className="text-[#d9d9d9] group-hover:text-white transition-colors duration-300">
+                              {stat.label}
+                            </span>
+                            <span className="font-semibold">{stat.value}%</span>
+                          </div>
+                          <div className="w-full bg-white/10 rounded-full h-2">
+                            <motion.div
+                              className={`h-2 rounded-full bg-gradient-to-r ${faction.gradient}`}
+                              initial={{ width: 0 }}
+                              animate={
+                                factionsInView
+                                  ? { width: `${stat.value}%` }
+                                  : {}
+                              }
+                              transition={{
+                                duration: 1,
+                                delay: 0.5 + statIndex * 0.2,
+                                ease: "easeOut",
+                              }}
+                            />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Join faction button */}
+                    <div className="pt-4">
+                      <Button
+                        className={`w-full bg-gradient-to-r ${faction.gradient} hover:shadow-lg hover:shadow-current/25 text-white border-0 rounded-xl transition-all duration-300 group-hover:scale-105`}
+                      >
+                        Join Faction
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            );
+          })}
         </motion.div>
       </section>
 
       {/* Gameplay Section */}
       <section
         ref={gameplayRef}
-        className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12"
+        className="max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-20"
       >
         <motion.div
           variants={staggerContainer}
           initial="hidden"
           animate={gameplayInView ? "visible" : "hidden"}
-          className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center"
+          className="relative"
         >
-          <motion.div
-            variants={fadeInLeft}
-            className="grid grid-cols-2 gap-3 sm:gap-4 order-last lg:order-first"
-          >
-            <motion.img
-              whileHover={{ scale: 1.05 }}
-              src="/placeholder.svg?height=200&width=200"
-              alt="Narrative Decisions"
-              className="rounded-xl sm:rounded-2xl"
-            />
-            <motion.img
-              whileHover={{ scale: 1.05 }}
-              src="/placeholder.svg?height=200&width=200"
-              alt="Exploration"
-              className="rounded-xl sm:rounded-2xl"
-            />
-            <motion.img
-              whileHover={{ scale: 1.05 }}
-              src="/placeholder.svg?height=200&width=200"
-              alt="Resource Collection"
-              className="rounded-xl sm:rounded-2xl"
-            />
-            <motion.img
-              whileHover={{ scale: 1.05 }}
-              src="/placeholder.svg?height=200&width=200"
-              alt="Combat"
-              className="rounded-xl sm:rounded-2xl"
-            />
-          </motion.div>
+          <div className="relative z-10 py-8 sm:py-12">
+            <motion.div
+              variants={fadeInUp}
+              className="text-center mb-12 sm:mb-16"
+            >
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
+                <span className="bg-gradient-to-r from-[#f0a0f6] to-[#9747ff] bg-clip-text text-transparent">
+                  Gameplay
+                </span>
+              </h2>
+              <p className="text-[#d9d9d9] text-lg sm:text-xl max-w-3xl mx-auto leading-relaxed">
+                Immerse yourself in a world where every decision matters and
+                every action has consequences
+              </p>
+            </motion.div>
 
-          <motion.div variants={fadeInRight} className="space-y-4 sm:space-y-6">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold">
-              Gameplay
-            </h2>
+            <motion.div
+              variants={staggerContainer}
+              className="grid sm:grid-cols-2 gap-6 sm:gap-8 max-w-6xl mx-auto"
+            >
+              {gameplayFeatures.map((feature, index) => {
+                const IconComponent = feature.icon;
+                return (
+                  <motion.div
+                    key={index}
+                    variants={staggerItem}
+                    whileHover={{
+                      scale: 1.05,
+                      transition: { duration: 0.3, ease: "easeOut" },
+                    }}
+                    className="group relative"
+                  >
+                    <div className="relative bg-gradient-to-br from-[#100425]/80 to-[#1a0a3a]/80 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-[#9747ff]/30 hover:border-[#f0a0f6]/50 transition-all duration-300 overflow-hidden">
+                      {/* Animated background gradient */}
+                      <div
+                        className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}
+                      ></div>
 
-            <div className="space-y-4 sm:space-y-6">
-              <div>
-                <h3 className="text-lg sm:text-xl font-semibold mb-2 text-[#f0a0f6]">
-                  Narrative Decisions
-                </h3>
-                <p className="text-[#d9d9d9] text-sm sm:text-base">
-                  Every choice shapes your destiny and alters the balance of
-                  power in Arcanis.
-                </p>
-              </div>
+                      {/* Icon with gradient background */}
+                      <div
+                        className={`relative inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br ${feature.gradient} mb-6 group-hover:scale-110 transition-transform duration-300`}
+                      >
+                        <IconComponent className="w-8 h-8 text-white" />
+                      </div>
 
-              <div>
-                <h3 className="text-lg sm:text-xl font-semibold mb-2 text-[#f0a0f6]">
-                  Exploration
-                </h3>
-                <p className="text-[#d9d9d9] text-sm sm:text-base">
-                  Discover hidden secrets in the most dangerous corners of the
-                  dystopian city.
-                </p>
-              </div>
+                      <h3 className="text-xl sm:text-2xl font-bold mb-4 group-hover:text-[#f0a0f6] transition-colors duration-300">
+                        {feature.title}
+                      </h3>
 
-              <div>
-                <h3 className="text-lg sm:text-xl font-semibold mb-2 text-[#f0a0f6]">
-                  Resource Collection
-                </h3>
-                <p className="text-[#d9d9d9] text-sm sm:text-base">
-                  Gather resources and upgrade your abilities to survive in this
-                  hostile world.
-                </p>
-              </div>
+                      <p className="text-[#d9d9d9] text-sm sm:text-base leading-relaxed group-hover:text-white transition-colors duration-300">
+                        {feature.description}
+                      </p>
 
-              <div>
-                <h3 className="text-lg sm:text-xl font-semibold mb-2 text-[#f0a0f6]">
-                  Combat
-                </h3>
-                <p className="text-[#d9d9d9] text-sm sm:text-base">
-                  Face your enemies with a tactical and immersive combat system.
-                </p>
-              </div>
-            </div>
-
-            <Button className="bg-[#9747ff] hover:bg-[#f0a0f6] text-white px-6 sm:px-8 py-2 sm:py-3 rounded-full">
-              Learn More
-            </Button>
-          </motion.div>
+                      {/* Decorative corner element */}
+                      <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-[#9747ff]/20 to-transparent rounded-bl-3xl"></div>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </motion.div>
+          </div>
         </motion.div>
       </section>
 
@@ -380,29 +503,37 @@ export default function Component() {
               </span>
             </h2>
             <p className="text-[#d9d9d9] text-sm sm:text-base lg:text-lg">
-              Experience the immersive world of Arcanis through our exclusive
-              gameplay footage. Witness the power of choice, the intensity of
-              combat, and the beauty of a world reborn.
+              Watch real gameplay footage showcasing the cyberpunk world of
+              Arcanis. Experience the tactical combat system, inventory
+              management, and immersive urban environments that await you in
+              this dystopian adventure.
             </p>
             <Button className="bg-[#9747ff] hover:bg-[#f0a0f6] text-white px-6 sm:px-8 py-2 sm:py-3 rounded-full">
-              Watch Trailer
+              Play Video
             </Button>
           </motion.div>
           <motion.div variants={fadeInRight} className="relative">
             <motion.div
               whileHover={{ scale: 1.02 }}
-              className="relative bg-gradient-to-br from-[#9747ff]/20 to-[#f0a0f6]/20 rounded-xl sm:rounded-2xl p-4 sm:p-8 border border-[#9747ff]/30"
+              className="relative bg-gradient-to-br from-[#9747ff]/20 to-[#f0a0f6]/20 rounded-xl sm:rounded-2xl p-4 sm:p-8 border border-[#9747ff]/30 overflow-hidden"
             >
-              <img
-                src="/placeholder.svg?height=400&width=600"
-                alt="Game Demo Video"
-                className="rounded-lg sm:rounded-xl w-full"
-              />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="bg-[#9747ff] hover:bg-[#f0a0f6] transition-colors rounded-full p-3 sm:p-4">
-                  <ArrowRight className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
-                </div>
+              <div
+                className="relative w-full"
+                style={{ paddingBottom: "56.25%" }}
+              >
+                <iframe
+                  className="absolute top-0 left-0 w-full h-full rounded-lg sm:rounded-xl"
+                  src="https://www.youtube.com/embed/mRH9Z97SwHY?si=QkK4qp9HwxYkMBaG"
+                  title="Citizen of Arcanis - Gameplay Demo"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                />
               </div>
+
+              {/* Decorative gradient overlay on hover */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#9747ff]/10 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-xl sm:rounded-2xl" />
             </motion.div>
           </motion.div>
         </motion.div>
