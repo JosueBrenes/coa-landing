@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { ArrowRight, Download, Menu } from "lucide-react"
 import { motion, useInView } from "framer-motion"
-import { useRef } from "react"
+import { useRef, useState } from "react"
 
 export default function Component() {
   // Animation variants
@@ -45,11 +45,39 @@ export default function Component() {
   const demoRef = useRef(null)
   const waitlistRef = useRef(null)
 
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
+  const [message, setMessage] = useState("")
+
   const heroInView = useInView(heroRef, { once: true, margin: "-100px" })
   const factionsInView = useInView(factionsRef, { once: true, margin: "-100px" })
   const gameplayInView = useInView(gameplayRef, { once: true, margin: "-100px" })
   const demoInView = useInView(demoRef, { once: true, margin: "-100px" })
   const waitlistInView = useInView(waitlistRef, { once: true, margin: "-100px" })
+
+  const handleJoinWaitlist = async () => {
+    if (!name || !email) {
+      setMessage("Please provide your name and email")
+      return
+    }
+    try {
+      const res = await fetch("/api/waitlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email }),
+      })
+      if (res.ok) {
+        setMessage("Successfully joined the waitlist!")
+        setName("")
+        setEmail("")
+      } else {
+        setMessage("Something went wrong")
+      }
+    } catch (err) {
+      console.error(err)
+      setMessage("Error submitting form")
+    }
+  }
 
   return (
     <div className="min-h-screen bg-[#100425] text-white overflow-x-hidden">
@@ -338,17 +366,25 @@ export default function Component() {
             <div className="flex flex-col sm:flex-row max-w-md mx-auto space-y-3 sm:space-y-0 sm:space-x-4">
               <Input
                 placeholder="Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 className="bg-transparent border-[#9747ff]/50 text-white placeholder:text-[#b0b0b0] flex-1"
               />
               <Input
                 placeholder="Email Address"
                 type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="bg-transparent border-[#9747ff]/50 text-white placeholder:text-[#b0b0b0] flex-1"
               />
             </div>
-            <Button className="bg-[#9747ff] hover:bg-[#f0a0f6] text-white px-6 sm:px-8 py-2 sm:py-3 rounded-full w-full sm:w-auto">
+            <Button
+              onClick={handleJoinWaitlist}
+              className="bg-[#9747ff] hover:bg-[#f0a0f6] text-white px-6 sm:px-8 py-2 sm:py-3 rounded-full w-full sm:w-auto"
+            >
               Join Waitlist
             </Button>
+            {message && <p className="text-sm text-center mt-2">{message}</p>}
           </div>
         </motion.div>
       </section>
