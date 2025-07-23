@@ -1,26 +1,38 @@
-"use client"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { ArrowRight, Download, Menu } from "lucide-react"
-import { motion, useInView } from "framer-motion"
-import { useRef } from "react"
+"use client";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { ArrowRight, Download, Menu } from "lucide-react";
+import { motion, useInView } from "framer-motion";
+import { useRef, useState } from "react";
 
 export default function Component() {
   // Animation variants
   const fadeInUp = {
     hidden: { opacity: 0, y: 60 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
-  }
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, ease: "easeOut" },
+    },
+  };
 
   const fadeInLeft = {
     hidden: { opacity: 0, x: -60 },
-    visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: "easeOut" } },
-  }
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.8, ease: "easeOut" },
+    },
+  };
 
   const fadeInRight = {
     hidden: { opacity: 0, x: 60 },
-    visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: "easeOut" } },
-  }
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.8, ease: "easeOut" },
+    },
+  };
 
   const staggerContainer = {
     hidden: { opacity: 0 },
@@ -31,25 +43,66 @@ export default function Component() {
         delayChildren: 0.1,
       },
     },
-  }
+  };
 
   const staggerItem = {
     hidden: { opacity: 0, y: 40 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
-  }
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: "easeOut" },
+    },
+  };
 
   // Refs for scroll animations
-  const heroRef = useRef(null)
-  const factionsRef = useRef(null)
-  const gameplayRef = useRef(null)
-  const demoRef = useRef(null)
-  const waitlistRef = useRef(null)
+  const heroRef = useRef(null);
+  const factionsRef = useRef(null);
+  const gameplayRef = useRef(null);
+  const demoRef = useRef(null);
+  const waitlistRef = useRef(null);
 
-  const heroInView = useInView(heroRef, { once: true, margin: "-100px" })
-  const factionsInView = useInView(factionsRef, { once: true, margin: "-100px" })
-  const gameplayInView = useInView(gameplayRef, { once: true, margin: "-100px" })
-  const demoInView = useInView(demoRef, { once: true, margin: "-100px" })
-  const waitlistInView = useInView(waitlistRef, { once: true, margin: "-100px" })
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+
+  const heroInView = useInView(heroRef, { once: true, margin: "-100px" });
+  const factionsInView = useInView(factionsRef, {
+    once: true,
+    margin: "-100px",
+  });
+  const gameplayInView = useInView(gameplayRef, {
+    once: true,
+    margin: "-100px",
+  });
+  const demoInView = useInView(demoRef, { once: true, margin: "-100px" });
+  const waitlistInView = useInView(waitlistRef, {
+    once: true,
+    margin: "-100px",
+  });
+
+  const handleJoinWaitlist = async () => {
+    if (!name || !email) {
+      setMessage("Please provide your name and email");
+      return;
+    }
+    try {
+      const res = await fetch("/api/waitlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email }),
+      });
+      if (res.ok) {
+        setMessage("Successfully joined the waitlist!");
+        setName("");
+        setEmail("");
+      } else {
+        setMessage("Something went wrong");
+      }
+    } catch (err) {
+      console.error(err);
+      setMessage("Error submitting form");
+    }
+  };
 
   return (
     <div className="min-h-screen bg-[#100425] text-white overflow-x-hidden">
@@ -112,54 +165,58 @@ export default function Component() {
       {/* Hero Section */}
       <section
         ref={heroRef}
-        className="relative max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12 min-h-[80vh] sm:min-h-screen flex items-center"
+        className="relative max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-24 min-h-[80vh] sm:min-h-screen flex items-center justify-center"
       >
+        {/* Background gradient */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#f0a0f6] to-[#9747ff] rounded-2xl sm:rounded-3xl blur-2xl sm:blur-3xl opacity-20"></div>
+
         <motion.div
           variants={staggerContainer}
           initial="hidden"
           animate={heroInView ? "visible" : "hidden"}
-          className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center relative z-10 w-full"
+          className="text-center space-y-6 sm:space-y-8 max-w-5xl mx-auto relative z-10"
         >
-          <motion.div variants={staggerItem} className="space-y-4 sm:space-y-6 text-center lg:text-left">
-            <motion.h1
-              variants={fadeInLeft}
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight"
-            >
-              Rewrite your destiny in{" "}
-              <span className="bg-gradient-to-r from-[#f0a0f6] to-[#9747ff] bg-clip-text text-transparent">
-                Arcanis
-              </span>
-            </motion.h1>
-            <motion.p variants={fadeInLeft} className="text-[#d9d9d9] text-base sm:text-lg max-w-md mx-auto lg:mx-0">
-              In a world fragmented by technology, only one path remains: rise, fight, and conquer.
-            </motion.p>
-            <motion.div variants={fadeInLeft}>
-              <Button className="bg-[#9747ff] hover:bg-[#f0a0f6] text-white px-6 sm:px-8 py-2 sm:py-3 rounded-full text-sm sm:text-base">
-                Start your story
-                <ArrowRight className="ml-2 w-4 h-4" />
-              </Button>
-            </motion.div>
-          </motion.div>
-          <motion.div variants={fadeInRight} className="relative order-first lg:order-last">
-            <div className="absolute inset-0 bg-gradient-to-r from-[#f0a0f6] to-[#9747ff] rounded-2xl sm:rounded-3xl blur-2xl sm:blur-3xl opacity-30"></div>
-            <img
-              src="/placeholder.svg?height=600&width=500"
-              alt="Arcanis warrior"
-              className="relative z-10 w-full h-auto rounded-2xl sm:rounded-3xl"
-            />
+          <motion.h1
+            variants={fadeInUp}
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight"
+          >
+            Rewrite your destiny in{" "}
+            <span className="bg-gradient-to-r from-[#f0a0f6] to-[#9747ff] bg-clip-text text-transparent">
+              Arcanis
+            </span>
+          </motion.h1>
+
+          <motion.p
+            variants={fadeInUp}
+            className="text-[#d9d9d9] text-lg sm:text-xl lg:text-2xl max-w-3xl mx-auto leading-relaxed"
+          >
+            In a world fragmented by technology, only one path remains: rise,
+            fight, and conquer.
+          </motion.p>
+
+          <motion.div variants={fadeInUp} className="pt-4">
+            <Button className="bg-[#9747ff] hover:bg-[#f0a0f6] text-white px-8 sm:px-12 py-3 sm:py-4 rounded-full text-base sm:text-lg font-semibold">
+              Start your story
+              <ArrowRight className="ml-3 w-5 h-5" />
+            </Button>
           </motion.div>
         </motion.div>
       </section>
 
       {/* Factions Section */}
-      <section ref={factionsRef} className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+      <section
+        ref={factionsRef}
+        className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12"
+      >
         <motion.div
           variants={fadeInUp}
           initial="hidden"
           animate={factionsInView ? "visible" : "hidden"}
           className="text-center mb-8 sm:mb-12"
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">Factions</h2>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
+            Factions
+          </h2>
         </motion.div>
 
         <motion.div
@@ -199,22 +256,32 @@ export default function Component() {
                 alt={faction.name}
                 className="w-full h-32 sm:h-48 object-cover rounded-lg sm:rounded-xl mb-3 sm:mb-4"
               />
-              <h3 className="text-lg sm:text-xl font-semibold mb-2">{faction.name}</h3>
-              <p className="text-[#d9d9d9] text-sm sm:text-base leading-relaxed">{faction.description}</p>
+              <h3 className="text-lg sm:text-xl font-semibold mb-2">
+                {faction.name}
+              </h3>
+              <p className="text-[#d9d9d9] text-sm sm:text-base leading-relaxed">
+                {faction.description}
+              </p>
             </motion.div>
           ))}
         </motion.div>
       </section>
 
       {/* Gameplay Section */}
-      <section ref={gameplayRef} className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+      <section
+        ref={gameplayRef}
+        className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12"
+      >
         <motion.div
           variants={staggerContainer}
           initial="hidden"
           animate={gameplayInView ? "visible" : "hidden"}
           className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center"
         >
-          <motion.div variants={fadeInLeft} className="grid grid-cols-2 gap-3 sm:gap-4 order-last lg:order-first">
+          <motion.div
+            variants={fadeInLeft}
+            className="grid grid-cols-2 gap-3 sm:gap-4 order-last lg:order-first"
+          >
             <motion.img
               whileHover={{ scale: 1.05 }}
               src="/placeholder.svg?height=200&width=200"
@@ -242,32 +309,45 @@ export default function Component() {
           </motion.div>
 
           <motion.div variants={fadeInRight} className="space-y-4 sm:space-y-6">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold">Gameplay</h2>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold">
+              Gameplay
+            </h2>
 
             <div className="space-y-4 sm:space-y-6">
               <div>
-                <h3 className="text-lg sm:text-xl font-semibold mb-2 text-[#f0a0f6]">Narrative Decisions</h3>
+                <h3 className="text-lg sm:text-xl font-semibold mb-2 text-[#f0a0f6]">
+                  Narrative Decisions
+                </h3>
                 <p className="text-[#d9d9d9] text-sm sm:text-base">
-                  Every choice shapes your destiny and alters the balance of power in Arcanis.
+                  Every choice shapes your destiny and alters the balance of
+                  power in Arcanis.
                 </p>
               </div>
 
               <div>
-                <h3 className="text-lg sm:text-xl font-semibold mb-2 text-[#f0a0f6]">Exploration</h3>
+                <h3 className="text-lg sm:text-xl font-semibold mb-2 text-[#f0a0f6]">
+                  Exploration
+                </h3>
                 <p className="text-[#d9d9d9] text-sm sm:text-base">
-                  Discover hidden secrets in the most dangerous corners of the dystopian city.
+                  Discover hidden secrets in the most dangerous corners of the
+                  dystopian city.
                 </p>
               </div>
 
               <div>
-                <h3 className="text-lg sm:text-xl font-semibold mb-2 text-[#f0a0f6]">Resource Collection</h3>
+                <h3 className="text-lg sm:text-xl font-semibold mb-2 text-[#f0a0f6]">
+                  Resource Collection
+                </h3>
                 <p className="text-[#d9d9d9] text-sm sm:text-base">
-                  Gather resources and upgrade your abilities to survive in this hostile world.
+                  Gather resources and upgrade your abilities to survive in this
+                  hostile world.
                 </p>
               </div>
 
               <div>
-                <h3 className="text-lg sm:text-xl font-semibold mb-2 text-[#f0a0f6]">Combat</h3>
+                <h3 className="text-lg sm:text-xl font-semibold mb-2 text-[#f0a0f6]">
+                  Combat
+                </h3>
                 <p className="text-[#d9d9d9] text-sm sm:text-base">
                   Face your enemies with a tactical and immersive combat system.
                 </p>
@@ -282,7 +362,10 @@ export default function Component() {
       </section>
 
       {/* Video Demo Section */}
-      <section ref={demoRef} className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+      <section
+        ref={demoRef}
+        className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12"
+      >
         <motion.div
           variants={staggerContainer}
           initial="hidden"
@@ -292,11 +375,14 @@ export default function Component() {
           <motion.div variants={fadeInLeft} className="space-y-4 sm:space-y-6">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold">
               Video{" "}
-              <span className="bg-gradient-to-r from-[#f0a0f6] to-[#9747ff] bg-clip-text text-transparent">Demo</span>
+              <span className="bg-gradient-to-r from-[#f0a0f6] to-[#9747ff] bg-clip-text text-transparent">
+                Demo
+              </span>
             </h2>
             <p className="text-[#d9d9d9] text-sm sm:text-base lg:text-lg">
-              Experience the immersive world of Arcanis through our exclusive gameplay footage. Witness the power of
-              choice, the intensity of combat, and the beauty of a world reborn.
+              Experience the immersive world of Arcanis through our exclusive
+              gameplay footage. Witness the power of choice, the intensity of
+              combat, and the beauty of a world reborn.
             </p>
             <Button className="bg-[#9747ff] hover:bg-[#f0a0f6] text-white px-6 sm:px-8 py-2 sm:py-3 rounded-full">
               Watch Trailer
@@ -323,7 +409,10 @@ export default function Component() {
       </section>
 
       {/* Waitlist Section */}
-      <section ref={waitlistRef} className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+      <section
+        ref={waitlistRef}
+        className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12"
+      >
         <motion.div
           variants={fadeInUp}
           initial="hidden"
@@ -331,24 +420,34 @@ export default function Component() {
           className="bg-gradient-to-r from-[#9747ff]/20 to-[#f0a0f6]/20 rounded-2xl sm:rounded-3xl p-6 sm:p-8 border border-[#9747ff]/50"
         >
           <div className="text-center space-y-4 sm:space-y-6">
-            <h3 className="text-2xl sm:text-3xl font-bold">Join the Waitlist</h3>
+            <h3 className="text-2xl sm:text-3xl font-bold">
+              Join the Waitlist
+            </h3>
             <p className="text-[#d9d9d9] text-sm sm:text-base">
               Be the first to experience the world of Arcanis when it launches
             </p>
             <div className="flex flex-col sm:flex-row max-w-md mx-auto space-y-3 sm:space-y-0 sm:space-x-4">
               <Input
                 placeholder="Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 className="bg-transparent border-[#9747ff]/50 text-white placeholder:text-[#b0b0b0] flex-1"
               />
               <Input
                 placeholder="Email Address"
                 type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="bg-transparent border-[#9747ff]/50 text-white placeholder:text-[#b0b0b0] flex-1"
               />
             </div>
-            <Button className="bg-[#9747ff] hover:bg-[#f0a0f6] text-white px-6 sm:px-8 py-2 sm:py-3 rounded-full w-full sm:w-auto">
+            <Button
+              onClick={handleJoinWaitlist}
+              className="bg-[#9747ff] hover:bg-[#f0a0f6] text-white px-6 sm:px-8 py-2 sm:py-3 rounded-full w-full sm:w-auto"
+            >
               Join Waitlist
             </Button>
+            {message && <p className="text-sm text-center mt-2">{message}</p>}
           </div>
         </motion.div>
       </section>
@@ -369,9 +468,12 @@ export default function Component() {
             viewport={{ once: true }}
             className="col-span-1 sm:col-span-2 lg:col-span-1"
           >
-            <h4 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4">Citizen of Arcanis</h4>
+            <h4 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4">
+              Citizen of Arcanis
+            </h4>
             <p className="text-[#d9d9d9] text-sm">
-              A dystopian world where technology and chaos converge to create a unique experience.
+              A dystopian world where technology and chaos converge to create a
+              unique experience.
             </p>
           </motion.div>
 
@@ -384,7 +486,11 @@ export default function Component() {
             <h5 className="font-semibold mb-3 sm:mb-4">Links</h5>
             <div className="space-y-2 text-sm text-[#d9d9d9]">
               {["Home", "Factions", "Story", "Gameplay", "Join"].map((link) => (
-                <a key={link} href="#" className="block hover:text-[#f0a0f6] transition-colors">
+                <a
+                  key={link}
+                  href="#"
+                  className="block hover:text-[#f0a0f6] transition-colors"
+                >
                   {link}
                 </a>
               ))}
@@ -400,7 +506,11 @@ export default function Component() {
             <h5 className="font-semibold mb-3 sm:mb-4">Support</h5>
             <div className="space-y-2 text-sm text-[#d9d9d9]">
               {["FAQ", "Contact", "Privacy", "Terms of Use"].map((link) => (
-                <a key={link} href="#" className="block hover:text-[#f0a0f6] transition-colors">
+                <a
+                  key={link}
+                  href="#"
+                  className="block hover:text-[#f0a0f6] transition-colors"
+                >
                   {link}
                 </a>
               ))}
@@ -446,5 +556,5 @@ export default function Component() {
         </motion.div>
       </motion.footer>
     </div>
-  )
+  );
 }
