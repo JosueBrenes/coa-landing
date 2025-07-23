@@ -392,15 +392,6 @@ export default function Component() {
                         </div>
                       ))}
                     </div>
-
-                    {/* Join faction button */}
-                    <div className="pt-4">
-                      <Button
-                        className={`w-full bg-gradient-to-r ${faction.gradient} hover:shadow-lg hover:shadow-current/25 text-white border-0 rounded-xl transition-all duration-300 group-hover:scale-105`}
-                      >
-                        Join Faction
-                      </Button>
-                    </div>
                   </div>
                 </div>
               </motion.div>
