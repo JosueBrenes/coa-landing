@@ -270,264 +270,186 @@ export default function Component() {
             variants={fadeInUp}
             className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight"
           >
-            Rewrite your destiny in{" "}
-            <span className="bg-gradient-to-r from-[#f0a0f6] to-[#9747ff] bg-clip-text text-transparent">
-              Arcanis
-            </span>
+            SOME GAMES HAVE ENDINGS. OURS HAS EPOCHS.
           </motion.h1>
 
           <motion.p
             variants={fadeInUp}
             className="text-[#d9d9d9] text-lg sm:text-xl lg:text-2xl max-w-3xl mx-auto leading-relaxed"
           >
-            In a world fragmented by technology, only one path remains: rise,
-            fight, and conquer.
+            Citizen of Arcanis: The first game where "Game Over" is just another player choice.
           </motion.p>
 
           <motion.div variants={fadeInUp} className="pt-4">
             <Button className="bg-[#9747ff] hover:bg-[#f0a0f6] text-white px-8 sm:px-12 py-3 sm:py-4 rounded-full text-base sm:text-lg font-semibold">
-              Start your story
+              JOIN THE CONSENSUS
               <ArrowRight className="ml-3 w-5 h-5" />
             </Button>
           </motion.div>
         </motion.div>
       </section>
 
-      {/* Factions Section */}
-      <section
-        ref={factionsRef}
-        className="max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-20"
-      >
+      {/* Web3 Native Campaign Section */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-20">
         <motion.div
-          variants={fadeInUp}
+          variants={staggerContainer}
           initial="hidden"
           animate={factionsInView ? "visible" : "hidden"}
           className="text-center mb-12 sm:mb-16"
         >
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
             <span className="bg-gradient-to-r from-[#f0a0f6] to-[#9747ff] bg-clip-text text-transparent">
-              Factions
+              BE THE BLOCKCHAIN YOU WANT TO SEE IN THE WORLD
             </span>
           </h2>
           <p className="text-[#d9d9d9] text-lg sm:text-xl max-w-3xl mx-auto leading-relaxed">
-            Choose your allegiance and shape the future of Arcanis through the
-            power of your faction
+            Citizen of Arcanis transforma a los jugadores de usuarios a arquitectos. No juegas en nuestra caja de arena: ¡estás programando la arena misma! Cada jugador es una actualización de protocolo. Cada batalla, un mecanismo de consenso. Cada ítem, un smart contract esperando evolucionar.
           </p>
         </motion.div>
-
         <motion.div
           variants={staggerContainer}
           initial="hidden"
           animate={factionsInView ? "visible" : "hidden"}
           className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
         >
-          {factions.map((faction, index) => {
-            const IconComponent = faction.icon;
-            return (
-              <motion.div
-                key={index}
-                variants={staggerItem}
-                whileHover={{
-                  scale: 1.05,
-                  transition: { duration: 0.3, ease: "easeOut" },
-                }}
-                className="group relative"
-              >
-                <div
-                  className={`relative bg-gradient-to-br from-[#100425]/90 to-[#1a0a3a]/90 backdrop-blur-sm rounded-3xl p-6 sm:p-8 border ${faction.borderColor} ${faction.hoverBorder} transition-all duration-300 overflow-hidden h-full`}
-                >
-                  {/* Animated background gradient */}
-                  <div
-                    className={`absolute inset-0 bg-gradient-to-br ${faction.bgGradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
-                  ></div>
-
-                  {/* Decorative elements */}
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-white/5 to-transparent rounded-bl-full"></div>
-                  <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-white/5 to-transparent rounded-tr-full"></div>
-
-                  {/* Icon with gradient background */}
-                  <div className="relative z-10 mb-6">
-                    <div
-                      className={`inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-gradient-to-br ${faction.gradient} mb-4 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-lg`}
-                    >
-                      <IconComponent className="w-10 h-10 text-white" />
-                    </div>
-                  </div>
-
-                  <div className="relative z-10 space-y-4">
-                    <h3 className="text-2xl sm:text-3xl font-bold group-hover:text-white transition-colors duration-300">
-                      {faction.name}
-                    </h3>
-
-                    <p className="text-[#d9d9d9] text-sm sm:text-base leading-relaxed group-hover:text-white/90 transition-colors duration-300">
-                      {faction.description}
-                    </p>
-
-                    {/* Stats bars */}
-                    <div className="space-y-3 pt-4">
-                      {faction.stats.map((stat, statIndex) => (
-                        <div key={statIndex} className="space-y-1">
-                          <div className="flex justify-between text-xs sm:text-sm">
-                            <span className="text-[#d9d9d9] group-hover:text-white transition-colors duration-300">
-                              {stat.label}
-                            </span>
-                            <span className="font-semibold">{stat.value}%</span>
-                          </div>
-                          <div className="w-full bg-white/10 rounded-full h-2">
-                            <motion.div
-                              className={`h-2 rounded-full bg-gradient-to-r ${faction.gradient}`}
-                              initial={{ width: 0 }}
-                              animate={
-                                factionsInView
-                                  ? { width: `${stat.value}%` }
-                                  : {}
-                              }
-                              transition={{
-                                duration: 1,
-                                delay: 0.5 + statIndex * 0.2,
-                                ease: "easeOut",
-                              }}
-                            />
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            );
-          })}
-        </motion.div>
-      </section>
-
-      {/* Gameplay Section */}
-      <section
-        ref={gameplayRef}
-        className="max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-20"
-      >
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          animate={gameplayInView ? "visible" : "hidden"}
-          className="relative"
-        >
-          <div className="relative z-10 py-8 sm:py-12">
-            <motion.div
-              variants={fadeInUp}
-              className="text-center mb-12 sm:mb-16"
-            >
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
-                <span className="bg-gradient-to-r from-[#f0a0f6] to-[#9747ff] bg-clip-text text-transparent">
-                  Gameplay
-                </span>
-              </h2>
-              <p className="text-[#d9d9d9] text-lg sm:text-xl max-w-3xl mx-auto leading-relaxed">
-                Immerse yourself in a world where every decision matters and
-                every action has consequences
-              </p>
-            </motion.div>
-
-            <motion.div
-              variants={staggerContainer}
-              className="grid sm:grid-cols-2 gap-6 sm:gap-8 max-w-6xl mx-auto"
-            >
-              {gameplayFeatures.map((feature, index) => {
-                const IconComponent = feature.icon;
-                return (
-                  <motion.div
-                    key={index}
-                    variants={staggerItem}
-                    whileHover={{
-                      scale: 1.05,
-                      transition: { duration: 0.3, ease: "easeOut" },
-                    }}
-                    className="group relative"
-                  >
-                    <div className="relative bg-gradient-to-br from-[#100425]/80 to-[#1a0a3a]/80 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-[#9747ff]/30 hover:border-[#f0a0f6]/50 transition-all duration-300 overflow-hidden">
-                      {/* Animated background gradient */}
-                      <div
-                        className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}
-                      ></div>
-
-                      {/* Icon with gradient background */}
-                      <div
-                        className={`relative inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br ${feature.gradient} mb-6 group-hover:scale-110 transition-transform duration-300`}
-                      >
-                        <IconComponent className="w-8 h-8 text-white" />
-                      </div>
-
-                      <h3 className="text-xl sm:text-2xl font-bold mb-4 group-hover:text-[#f0a0f6] transition-colors duration-300">
-                        {feature.title}
-                      </h3>
-
-                      <p className="text-[#d9d9d9] text-sm sm:text-base leading-relaxed group-hover:text-white transition-colors duration-300">
-                        {feature.description}
-                      </p>
-
-                      {/* Decorative corner element */}
-                      <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-[#9747ff]/20 to-transparent rounded-bl-3xl"></div>
-                    </div>
-                  </motion.div>
-                );
-              })}
-            </motion.div>
+          <div className="col-span-1 flex flex-col items-center bg-gradient-to-br from-[#100425]/90 to-[#1a0a3a]/90 rounded-3xl p-8 border border-[#f0a0f6]/30">
+            <h3 className="text-2xl font-bold mb-2">The Compiler Class</h3>
+            <p className="text-[#d9d9d9] text-sm mb-4">Nueva clase de personaje que literalmente escribe contratos Cairo en combate. Hechizos son funciones, maná es gas, bugs son features. Jefes tipo "Debug the Dragon" requieren optimización de código para vencerlos.</p>
+          </div>
+          <div className="col-span-1 flex flex-col items-center bg-gradient-to-br from-[#100425]/90 to-[#1a0a3a]/90 rounded-3xl p-8 border border-[#f0a0f6]/30">
+            <h3 className="text-2xl font-bold mb-2">The Merge IRL</h3>
+            <p className="text-[#d9d9d9] text-sm mb-4">Instalación física donde las acciones de 100 jugadores se fusionan en un contrato Cairo gigante. Billboard en tiempo real mostrando decisiones de gobernanza on-chain. "Proof of Play" valida transacciones mediante gameplay.</p>
+          </div>
+          <div className="col-span-1 flex flex-col items-center bg-gradient-to-br from-[#100425]/90 to-[#1a0a3a]/90 rounded-3xl p-8 border border-[#f0a0f6]/30">
+            <h3 className="text-2xl font-bold mb-2">Fork Yourself</h3>
+            <p className="text-[#d9d9d9] text-sm mb-4">Eventos semanales donde la comunidad puede forkar regiones enteras del juego. Universos paralelos con reglas distintas. "Canon Wars": realidades compiten por adopción en mainnet.</p>
+          </div>
+          <div className="col-span-1 flex flex-col items-center bg-gradient-to-br from-[#100425]/90 to-[#1a0a3a]/90 rounded-3xl p-8 border border-[#f0a0f6]/30">
+            <h3 className="text-2xl font-bold mb-2">The Nakamoto Chronicles</h3>
+            <p className="text-[#d9d9d9] text-sm mb-4">Serie documental de jugadores que alteraron mecánicas para siempre. "Rompí la economía del juego y así lo logré". Salón de la fama de smart contracts elegantes.</p>
+          </div>
+          <div className="col-span-1 flex flex-col items-center bg-gradient-to-br from-[#100425]/90 to-[#1a0a3a]/90 rounded-3xl p-8 border border-[#f0a0f6]/30">
+            <h3 className="text-2xl font-bold mb-2">Modular Mythology</h3>
+            <p className="text-[#d9d9d9] text-sm mb-4">Cada arma/armadura es un smart contract composable. Los jugadores pueden forkar, mergear y desplegar ítems híbridos. Marketplace tipo Github para gear.</p>
           </div>
         </motion.div>
       </section>
 
-      {/* Video Demo Section */}
-      <section
-        ref={demoRef}
-        className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12"
-      >
+      {/* Mainstream Gamer Campaign Section */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-20">
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          animate={gameplayInView ? "visible" : "hidden"}
+          className="text-center mb-12 sm:mb-16"
+        >
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
+            <span className="bg-gradient-to-r from-[#f0a0f6] to-[#9747ff] bg-clip-text text-transparent">
+              THE LAST GAME YOU'LL EVER LOSE
+            </span>
+          </h2>
+          <p className="text-[#d9d9d9] text-lg sm:text-xl max-w-3xl mx-auto leading-relaxed">
+            Citizen of Arcanis no es solo permanente: es póstumo. El primer juego con una capa de persistencia real, donde tu personaje sobrevive a ti, a los devs y quizá a la civilización. Bienvenido al juego que ni la muerte puede borrar.
+          </p>
+        </motion.div>
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          animate={gameplayInView ? "visible" : "hidden"}
+          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
+        >
+          <div className="col-span-1 flex flex-col items-center bg-gradient-to-br from-[#100425]/90 to-[#1a0a3a]/90 rounded-3xl p-8 border border-[#f0a0f6]/30">
+            <h3 className="text-2xl font-bold mb-2">Digital DNA System</h3>
+            <p className="text-[#d9d9d9] text-sm mb-4">Tus personajes tienen código genético que pasa a nuevos jugadores. Evolución multigeneracional. "La espada de mi abuelo" es ahora una mecánica real.</p>
+          </div>
+          <div className="col-span-1 flex flex-col items-center bg-gradient-to-br from-[#100425]/90 to-[#1a0a3a]/90 rounded-3xl p-8 border border-[#f0a0f6]/30">
+            <h3 className="text-2xl font-bold mb-2">The Shutdown Shelter</h3>
+            <p className="text-[#d9d9d9] text-sm mb-4">Experiencia pop-up en convenciones: "refugio de jugadores" para migrantes de MMOs caídos. Importa el nombre y stats de tu personaje muerto.</p>
+          </div>
+          <div className="col-span-1 flex flex-col items-center bg-gradient-to-br from-[#100425]/90 to-[#1a0a3a]/90 rounded-3xl p-8 border border-[#f0a0f6]/30">
+            <h3 className="text-2xl font-bold mb-2">Eternal Speedrun</h3>
+            <p className="text-[#d9d9d9] text-sm mb-4">Categoría: "Haz historia en 24 horas". Monumentos permanentes para primeros logros. NFTs cápsula del tiempo que se desbloquean en 2074.</p>
+          </div>
+          <div className="col-span-1 flex flex-col items-center bg-gradient-to-br from-[#100425]/90 to-[#1a0a3a]/90 rounded-3xl p-8 border border-[#f0a0f6]/30">
+            <h3 className="text-2xl font-bold mb-2">The Testament Update</h3>
+            <p className="text-[#d9d9d9] text-sm mb-4">Testamentos y herencias in-game. "Dynasty Mode" para juego multigeneracional. Mentores fantasma entrenados por IA de jugadores fallecidos.</p>
+          </div>
+          <div className="col-span-1 flex flex-col items-center bg-gradient-to-br from-[#100425]/90 to-[#1a0a3a]/90 rounded-3xl p-8 border border-[#f0a0f6]/30">
+            <h3 className="text-2xl font-bold mb-2">Stories That Can't Die</h3>
+            <p className="text-[#d9d9d9] text-sm mb-4">Modo arqueología digital: explora civilizaciones de jugadores de hace 10 años. Serie documental: "Los Inmortales de Arcanis".</p>
+          </div>
+        </motion.div>
+      </section>
+
+      {/* Manifesto Section */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 py-16 sm:py-20">
         <motion.div
           variants={staggerContainer}
           initial="hidden"
           animate={demoInView ? "visible" : "hidden"}
-          className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center"
+          className="text-center space-y-8"
         >
-          <motion.div variants={fadeInLeft} className="space-y-4 sm:space-y-6">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold">
-              Video{" "}
-              <span className="bg-gradient-to-r from-[#f0a0f6] to-[#9747ff] bg-clip-text text-transparent">
-                Demo
-              </span>
-            </h2>
-            <p className="text-[#d9d9d9] text-sm sm:text-base lg:text-lg">
-              Watch real gameplay footage showcasing the cyberpunk world of
-              Arcanis. Experience the tactical combat system, inventory
-              management, and immersive urban environments that await you in
-              this dystopian adventure.
-            </p>
-            <Button className="bg-[#9747ff] hover:bg-[#f0a0f6] text-white px-6 sm:px-8 py-2 sm:py-3 rounded-full">
-              Play Video
-            </Button>
-          </motion.div>
-          <motion.div variants={fadeInRight} className="relative">
-            <motion.div
-              whileHover={{ scale: 1.02 }}
-              className="relative bg-gradient-to-br from-[#9747ff]/20 to-[#f0a0f6]/20 rounded-xl sm:rounded-2xl p-4 sm:p-8 border border-[#9747ff]/30 overflow-hidden"
-            >
-              <div
-                className="relative w-full"
-                style={{ paddingBottom: "56.25%" }}
-              >
-                <iframe
-                  className="absolute top-0 left-0 w-full h-full rounded-lg sm:rounded-xl"
-                  src="https://www.youtube.com/embed/mRH9Z97SwHY?si=QkK4qp9HwxYkMBaG&autoplay=1&vq=hd1080"
-                  title="Citizen of Arcanis - Gameplay Demo"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  referrerPolicy="strict-origin-when-cross-origin"
-                  allowFullScreen
-                />
-              </div>
-
-              {/* Decorative gradient overlay on hover */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#9747ff]/10 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-xl sm:rounded-2xl" />
-            </motion.div>
-          </motion.div>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
+            <span className="bg-gradient-to-r from-[#f0a0f6] to-[#9747ff] bg-clip-text text-transparent">
+              The Citizen's Creed
+            </span>
+          </h2>
+          <ul className="text-xl sm:text-2xl font-mono text-[#f0a0f6] space-y-2">
+            <li>In Code We Trust</li>
+            <li>In Cairo We Build</li>
+            <li>In Consensus We Thrive</li>
+            <li>In Perpetuity We Play</li>
+          </ul>
+          <p className="text-[#d9d9d9] text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed mt-6">
+            Citizen of Arcanis: The first game where "Game Over" is just another player choice.
+          </p>
         </motion.div>
+      </section>
+
+      {/* Results & Awards Section */}
+      <section className="max-w-5xl mx-auto px-4 sm:px-6 py-16 sm:py-20">
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          animate={waitlistInView ? "visible" : "hidden"}
+          className="text-center mb-12 sm:mb-16"
+        >
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
+            <span className="bg-gradient-to-r from-[#f0a0f6] to-[#9747ff] bg-clip-text text-transparent">
+              Results & Awards
+            </span>
+          </h2>
+        </motion.div>
+        <div className="grid sm:grid-cols-2 gap-8">
+          <div>
+            <h3 className="text-xl font-bold mb-4 text-[#f0a0f6]">Resultados</h3>
+            <ul className="text-[#d9d9d9] text-base space-y-2 text-left">
+              <li>10,000% increase in Cairo learning platform enrollment</li>
+              <li>First game where "nerf" requires a governance vote</li>
+              <li>$420M in player-created economic systems</li>
+              <li>StarkNet transaction volume up 6,900%</li>
+              <li>Coined new term: "Proof of Fun" consensus</li>
+              <li>5M players migrated from sunset MMOs</li>
+              <li>First game featured in the Smithsonian's permanent collection</li>
+              <li>97% player retention (3% tried to quit but couldn't figure out how)</li>
+              <li>TIME Magazine: "The Game That Solved Gaming Mortality"</li>
+              <li>Speedrun category "Any% Immortality" trending on Twitch</li>
+            </ul>
+          </div>
+          <div>
+            <h3 className="text-xl font-bold mb-4 text-[#f0a0f6]">Premios</h3>
+            <ul className="text-[#d9d9d9] text-base space-y-2 text-left">
+              <li>Gaming Innovation Grand Prix</li>
+              <li>Creative Technology Lion</li>
+              <li>Digital Craft: Technical Achievement</li>
+              <li>Entertainment Lion: Gaming</li>
+              <li>Direct Lion: Community Building</li>
+            </ul>
+          </div>
+        </div>
+        <p className="text-[#d9d9d9] text-base text-center mt-10 max-w-2xl mx-auto">
+          Porque cuando construyes en StarkNet, no solo haces un juego: haces historia inmutable.
+        </p>
       </section>
 
       {/* Waitlist Section */}
