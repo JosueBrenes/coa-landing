@@ -1,18 +1,18 @@
-import type { Metadata } from 'next'
-import { GeistSans } from 'geist/font/sans'
-import { GeistMono } from 'geist/font/mono'
-import './globals.css'
+import type { Metadata } from "next";
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
+import "./globals.css";
 
 export const metadata: Metadata = {
-  title: 'COA App',
-  description: 'Created with COA',
-  generator: 'coa.dev',
-}
+  title: "COA",
+  description: "Created with COA",
+  generator: "coa.dev",
+};
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode;
 }>) {
   return (
     <html lang="en">
@@ -27,5 +27,5 @@ html {
       </head>
       <body>{children}</body>
     </html>
-  )
+  );
 }
