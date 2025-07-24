@@ -1,0 +1,101 @@
+import { Button } from "@/components/ui/button";
+
+const GameModeSection = () => {
+  return (
+    <section className="py-20 bg-gradient-dark">
+      <div className="container mx-auto px-4">
+        {/* Three Factions Header */}
+        <div className="text-center mb-16">
+          <div className="bg-secondary border border-gaming-border p-4 inline-block mb-8">
+            <h2 className="text-2xl md:text-3xl font-orbitron font-black text-primary tracking-wider">
+              THREE FACTIONS, ONE UNCERTAIN FATE
+            </h2>
+          </div>
+        </div>
+
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Game Image/Video Area */}
+          <div className="relative">
+            <div className="aspect-video bg-secondary border-2 border-gaming-border relative overflow-hidden">
+              {/* Game Screenshot Placeholder */}
+              <div className="w-full h-full bg-gradient-to-br from-background to-secondary flex items-center justify-center">
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-primary/20 border border-primary rounded-sm mx-auto mb-4 flex items-center justify-center">
+                    <span className="text-primary font-orbitron text-xl">
+                      ▶
+                    </span>
+                  </div>
+                  <p className="text-muted-foreground font-mono text-sm">
+                    GAMEPLAY FOOTAGE
+                  </p>
+                </div>
+              </div>
+
+              {/* Gaming UI Overlay */}
+              <div className="absolute top-4 left-4 bg-background/80 border border-gaming-border p-2">
+                <span className="font-mono text-xs text-primary">K0</span>
+                <span className="font-mono text-xs text-muted-foreground ml-2">
+                  54
+                </span>
+              </div>
+
+              <div className="absolute bottom-4 left-4 bg-background/80 border border-gaming-border p-2">
+                <span className="font-mono text-xs text-accent">4th</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Content */}
+          <div className="space-y-8">
+            {/* Chaos Mercenaries */}
+            <div>
+              <h3 className="text-xl font-orbitron font-bold text-primary mb-4">
+                CHAOS MERCENARIES
+              </h3>
+              <h4 className="text-lg font-orbitron font-bold text-foreground mb-4">
+                FULL CONTROL OF THE BLACK MARKET
+              </h4>
+              <p className="text-muted-foreground font-mono leading-relaxed mb-6">
+                Low prices, unstable items, and exclusive access to underground
+                markets. Chaos Mercenaries dominate special zones where only
+                they can trade. High risk, but the rewards are tempting.
+              </p>
+            </div>
+
+            {/* Supreme Law */}
+            <div>
+              <h3 className="text-xl font-orbitron font-bold text-accent mb-4">
+                SUPREME LAW
+              </h3>
+              <h4 className="text-lg font-orbitron font-bold text-foreground mb-4">
+                SECURE TRADE AND TERRITORIAL CONTROL
+              </h4>
+              <p className="text-muted-foreground font-mono leading-relaxed mb-6">
+                High prices, but total guarantees. Supreme Law offers stability
+                and protection—but at the cost of freedom. Their territories are
+                safe, but their rules are unyielding.
+              </p>
+            </div>
+
+            {/* Rebel Technomancers */}
+            <div>
+              <h3 className="text-xl font-orbitron font-bold text-primary mb-4">
+                REBEL TECHNOMANCERS
+              </h3>
+              <h4 className="text-lg font-orbitron font-bold text-foreground mb-4">
+                EXPERIMENTAL WEAPONS AND ARCANE TECHNOLOGY
+              </h4>
+              <p className="text-muted-foreground font-mono leading-relaxed">
+                Rare weapons that can change the game—or fail spectacularly.
+                Technomancers fuse magic and technology, crafting unique gear
+                with unpredictable yet devastating powers.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default GameModeSection;
