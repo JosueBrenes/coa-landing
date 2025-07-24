@@ -1,9 +1,11 @@
 import { Button } from "@/components/ui/button";
+import ParticleBackground from "@/components/ParticleBackground";
 
 const GameModeSection = () => {
   return (
-    <section className="py-20 bg-gradient-dark">
-      <div className="container mx-auto px-4">
+    <section className="relative py-20 bg-gradient-dark overflow-hidden">
+      <ParticleBackground className="pointer-events-none" />
+      <div className="relative z-10 container mx-auto px-4">
         {/* Three Factions Header */}
         <div className="text-center mb-16">
           <div className="bg-secondary border border-gaming-border p-4 inline-block mb-8">
