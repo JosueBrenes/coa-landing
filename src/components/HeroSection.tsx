@@ -34,10 +34,16 @@ const HeroSection = () => {
 
           {/* Watch Trailer Button */}
           <div className="mb-12">
-            <Button variant="cyberpunk" size="lg" className="group">
-              <Play className="w-5 h-5 mr-2 group-hover:text-primary-foreground transition-colors" />
-              WATCH TRAILER
-            </Button>
+            <a
+              href="https://www.youtube.com/watch?v=mRH9Z97SwHY"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button variant="cyberpunk" size="lg" className="group">
+                <Play className="w-5 h-5 mr-2 group-hover:text-primary-foreground transition-colors" />
+                WATCH TRAILER
+              </Button>
+            </a>
           </div>
 
           {/* Description */}

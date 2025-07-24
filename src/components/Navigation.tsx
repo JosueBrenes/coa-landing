@@ -1,22 +1,23 @@
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
-import {
-  FaDiscord,
-  FaFacebook,
-  FaYoutube,
-  FaTiktok,
-  FaInstagram,
-  FaXTwitter,
-} from "react-icons/fa6";
+import { FaDiscord, FaTiktok, FaXTwitter } from "react-icons/fa6";
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const socialIcons = [
-    { name: "Discord", icon: <FaDiscord /> },
-    { name: "TikTok", icon: <FaTiktok /> },
-    { name: "X", icon: <FaXTwitter /> },
+    {
+      name: "Discord",
+      icon: <FaDiscord />,
+      link: "https://discord.gg/WB2AYvVcau",
+    },
+    {
+      name: "TikTok",
+      icon: <FaTiktok />,
+      link: "https://www.tiktok.com/@yourhandle",
+    },
+    { name: "X", icon: <FaXTwitter />, link: "https://x.com/LabsSunset_" },
   ];
 
   return (
@@ -32,17 +33,20 @@ const Navigation = () => {
             />
           </div>
 
-          {/* Social Icons */}
+          {/* Social Icons (Desktop) */}
           <div className="hidden md:flex items-center space-x-4">
             <div className="flex space-x-2">
-              {socialIcons.map(({ name, icon }) => (
-                <div
+              {socialIcons.map(({ name, icon, link }) => (
+                <a
                   key={name}
+                  href={link}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-10 h-10 bg-secondary border border-gaming-border flex items-center justify-center hover:bg-gaming-border transition-colors cursor-pointer text-xl text-muted-foreground"
                   aria-label={name}
                 >
                   {icon}
-                </div>
+                </a>
               ))}
             </div>
             <Button variant="gaming" size="sm" className="ml-4">
@@ -69,14 +73,17 @@ const Navigation = () => {
                 </Button>
               </div>
               <div className="flex justify-center gap-2 pt-4">
-                {socialIcons.map(({ name, icon }) => (
-                  <div
+                {socialIcons.map(({ name, icon, link }) => (
+                  <a
                     key={name}
+                    href={link}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="w-10 h-10 bg-secondary border border-gaming-border flex items-center justify-center hover:bg-gaming-border transition-colors cursor-pointer text-xl text-muted-foreground"
                     aria-label={name}
                   >
                     {icon}
-                  </div>
+                  </a>
                 ))}
               </div>
             </div>
