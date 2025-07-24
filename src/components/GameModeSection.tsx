@@ -14,34 +14,18 @@ const GameModeSection = () => {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Game Image/Video Area */}
+          {/* Game Video Area */}
           <div className="relative">
             <div className="aspect-video bg-secondary border-2 border-gaming-border relative overflow-hidden">
-              {/* Game Screenshot Placeholder */}
-              <div className="w-full h-full bg-gradient-to-br from-background to-secondary flex items-center justify-center">
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-primary/20 border border-primary rounded-sm mx-auto mb-4 flex items-center justify-center">
-                    <span className="text-primary font-orbitron text-xl">
-                      ▶
-                    </span>
-                  </div>
-                  <p className="text-muted-foreground font-mono text-sm">
-                    GAMEPLAY FOOTAGE
-                  </p>
-                </div>
-              </div>
-
-              {/* Gaming UI Overlay */}
-              <div className="absolute top-4 left-4 bg-background/80 border border-gaming-border p-2">
-                <span className="font-mono text-xs text-primary">K0</span>
-                <span className="font-mono text-xs text-muted-foreground ml-2">
-                  54
-                </span>
-              </div>
-
-              <div className="absolute bottom-4 left-4 bg-background/80 border border-gaming-border p-2">
-                <span className="font-mono text-xs text-accent">4th</span>
-              </div>
+              {/* Embedded Video */}
+              <video
+                className="w-full h-full object-cover"
+                src="/videos/COA.mp4"
+                autoPlay
+                muted
+                loop
+                playsInline
+              />
             </div>
           </div>
 
