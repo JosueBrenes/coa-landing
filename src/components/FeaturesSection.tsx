@@ -1,4 +1,5 @@
 import React from "react";
+import ParticleBackground from "@/components/ParticleBackground";
 
 interface Feature {
   title: string;
@@ -44,8 +45,9 @@ const features: Feature[] = [
 
 export default function FeaturesSection() {
   return (
-    <section id="features" className="py-16 md:py-24 bg-background">
-      <div className="container mx-auto px-4">
+    <section id="features" className="relative py-16 md:py-24 bg-background overflow-hidden">
+      <ParticleBackground className="pointer-events-none" />
+      <div className="relative z-10 container mx-auto px-4">
         <div className="text-center mb-12 md:mb-16">
           <h2 className="text-3xl md:text-5xl font-orbitron font-black text-foreground mb-4 tracking-tight">
             A METAVERSE OF EMERGENT STORIES
