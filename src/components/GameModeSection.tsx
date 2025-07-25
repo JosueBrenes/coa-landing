@@ -19,15 +19,15 @@ const GameModeSection = () => {
           {/* Game Video Area */}
           <div className="relative">
             <div className="aspect-video bg-secondary border-2 border-gaming-border relative overflow-hidden">
-              {/* Embedded Video */}
-              <video
-                className="w-full h-full object-cover"
-                src="/videos/COA.mp4"
-                autoPlay
-                muted
-                loop
-                playsInline
-              />
+              <iframe
+                className="w-full h-full"
+                src="https://www.youtube.com/embed/mRH9Z97SwHY?si=tME5MdFFp3DwAP1C"
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              ></iframe>
             </div>
           </div>
 
