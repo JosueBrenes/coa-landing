@@ -32,6 +32,13 @@ const HeroSection = () => {
             <span className="text-primary glitch-text">ARCANIS</span>
           </h1>
 
+          {/* Description */}
+          <div className="mb-12">
+            <h2 className="text-xl md:text-2xl font-orbitron font-bold mb-4 text-foreground">
+              YOU FOUGHT. YOU SACRIFICED. THEN THE GAME FORGOT.
+            </h2>
+          </div>
+
           {/* Watch Trailer Button */}
           <div className="mb-12">
             <a
@@ -44,19 +51,6 @@ const HeroSection = () => {
                 WATCH TRAILER
               </Button>
             </a>
-          </div>
-
-          {/* Description */}
-          <div className="mb-12">
-            <h2 className="text-xl md:text-2xl font-orbitron font-bold mb-4 text-foreground">
-              A PERSISTENT, LIVING WORLD SHAPED BY ITS PLAYERS
-            </h2>
-            <p className="text-lg md:text-xl text-muted-foreground font-mono max-w-3xl mx-auto leading-relaxed">
-              Arcanis is a post-apocalyptic city where every action matters: a
-              single player can spark wars, shift markets, or permanently change
-              the balance of factions. No resets, no safe routes—every decision
-              leaves permanent scars.
-            </p>
           </div>
         </div>
       </div>
