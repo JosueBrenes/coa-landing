@@ -1,8 +1,6 @@
-import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { FaDiscord, FaTiktok, FaXTwitter } from "react-icons/fa6";
-import WaitlistDialog from "./WaitlistDialog";
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -50,11 +48,6 @@ const Navigation = () => {
                 </a>
               ))}
             </div>
-            <WaitlistDialog>
-              <Button variant="gaming" size="sm" className="ml-4">
-                JOIN NOW ▼
-              </Button>
-            </WaitlistDialog>
           </div>
 
           {/* Mobile Menu Button */}
@@ -70,13 +63,6 @@ const Navigation = () => {
         {isMenuOpen && (
           <div className="md:hidden border-t border-gaming-border bg-background/95">
             <div className="px-2 pt-2 pb-3 space-y-1">
-              <div className="pt-4">
-                <WaitlistDialog>
-                  <Button variant="gaming" size="sm" className="w-full">
-                    JOIN NOW
-                  </Button>
-                </WaitlistDialog>
-              </div>
               <div className="flex justify-center gap-2 pt-4">
                 {socialIcons.map(({ name, icon, link }) => (
                   <a
